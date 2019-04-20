@@ -80,37 +80,50 @@ console.log(ar.slice(1))
 //The splice() method adds/removes items to/from an array, and returns the removed item(s).
 let days = ['mon', 'tues', 'fri',]
 
+//adds two items start at position 2
 days.splice(2, 0, 'wens', 'thurs')
 console.log(days)
 
+//adds two items starting at position 5
 days.splice(5, 0, 'sat', 'sun')
 console.log(days)
 
+//deletes 2 items starting at postion 5
 days.splice(5, 2)
 console.log(days)
 
+//deletes 2 items starting at position 2
 days.splice(2, 2)
 console.log(days)
 
+//replaces first 2 items
 days.splice(0, 2, 'fri', 'fri')
 console.log(days)
 //every day should be friday
 
+//concat combines to arrays together into one new array
+//concat creates a shallow copy of the old array
+let ar1 = [1,2,3,4]
+let ar2 = [5,6,7,8]
 
+let combine = ar1.concat(ar2)
+console.log(combine)
+console.log(combine.concat(9,10,11))
 
+//for looping over objects in javascript
+let obj = {val1: 1, val2: 2, val3: 3}
 
+//loop over each item and print its keys and values
+for (let i in obj){
+  console.log(`key: ${i} value: ${obj[i]}`)
+}
 
+//increase each object value by 2
+for (let i in obj){
+  obj[i] = obj[i] + 2
+}
 
-
-
-
-
-
-
-
-
-
-
+console.log(obj)
 
 
 
