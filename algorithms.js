@@ -104,4 +104,23 @@ let factorial = (num) => {
 let fact5 = factorial(5)
 console.log(fact5)
 
+/*
+  two pointer problem
+  a two pointer problem is one where you have a starting pointer at the first element
+  and another pointer at the last element, and you use those pointers to solve the problem
+  below is an example of how to reverse the elements in an array in log n speed
+*/
+
+let reverse = (ar) => {
+  let i = 0, j = ar.length - 1, temp
+  while(i !== j){
+    temp = ar[i]
+    ar[i] = ar[j]
+    ar[j] = temp
+    i++
+    j--
+  }
+  console.log(ar)
+}
+reverse(['h','e','l','l','o'])
 
