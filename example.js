@@ -55,4 +55,16 @@ for (let i = 0; i < classPs.length; i++){
 	builtStr = ''
 }
 
-console.log(ar)
+//traversing the dom tree
+
+for (let i = 0; i < document.body.childNodes.length; i++) {
+	console.log(document.body.childNodes[i]);
+}
+
+//elem.hasChildNodes() checks if a child node exists for a html node
+
+for (let node of document.body.childNodes) {
+  alert(node); // shows all nodes from the collection
+}
+
+

@@ -259,6 +259,3 @@ class Lab extends Dog {
 
 let lab = new Lab('sam', 'black lab')
 console.log(lab)
-
-
-
