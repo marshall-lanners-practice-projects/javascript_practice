@@ -67,4 +67,18 @@ for (let node of document.body.childNodes) {
   alert(node); // shows all nodes from the collection
 }
 
+// The <table> element supports (in addition to the given above) these properties:
+
+// table.rows – the collection of <tr> elements of the table.
+// table.caption/tHead/tFoot – references to elements <caption>, <thead>, <tfoot>.
+// table.tBodies – the collection of <tbody> elements (can be many according to the standard).
+
+
+// There are two main sets of them:
+
+// For all nodes: parentNode, childNodes, firstChild, lastChild, previousSibling, nextSibling.
+// For element nodes only: parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling.
+
+
+
 
