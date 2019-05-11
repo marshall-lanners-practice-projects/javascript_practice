@@ -40,45 +40,21 @@ class Rover {
   }
 }
 
-let rover1 = new Rover([1,2], 'N', 'LMLMLMLMM')
-let rover2 = new Rover([3,3], 'E', 'MMRMMRMRRM')
+let rover1 = new Rover([1,2], 1, 'LMLMLMLMM')
+let rover2 = new Rover([3,3], 2, 'MMRMMRMRRM')
 
-let findNext = (pos, direction) => {
-  let nextSpot
-  switch(direction){
-    case 'N':
-      nextSpot = [pos[0], pos[1] + 1]
-    break;
-    case 'E':
-      nextSpot = [pos[0] + 1, pos[1]]
-    break;
-    case 'S':
-      nextSpot = [pos[0], pos[1] - 1]
-    break;
-    case 'W':
-      nextSpot = [pos[0] - 1, pos[1]]
-    break;
-  }
-  return nextSpot
+let findNext = (pos, dir) => {
+  let move, moves = [[0, -1],[1, 1],[0, 1],[1, -1]]
+  move = moves[dir]
+  pos[move[0]] = pos[move[0]] + move[1]
+  return pos
 }
 
 let turn = (direction, turned) => {
-  let dir
-  switch(direction){
-    case 'N':
-      turned === 'L' ? (dir = 'W') : dir = 'E'
-    break;
-    case 'E':
-      turned === 'L' ? (dir = 'N') : dir = 'S'
-    break;
-    case 'S':
-      turned === 'L' ? (dir = 'E') : dir = 'W'
-    break;
-    case 'W':
-      turned === 'L' ? (dir = 'S') : dir = 'N'
-    break;
-  }
-  return dir
+  turned === 'L' ? (direction--) : direction++
+  direction < 0 && (direction = 3) 
+  direction > 3 && (direction = 0) 
+  return direction
 }
 
 let applyMoves = (rover) => {
@@ -86,8 +62,7 @@ let applyMoves = (rover) => {
   for (let i = 0; i < len; i++){
     if (rover.instr[i] != 'M'){
       rover.dir = turn(rover.dir, rover.instr[i])
-    }
-    if (rover.instr[i] === 'M'){
+    } else {
       rover.pos = findNext(rover.pos, rover.dir)
     }
   }
@@ -95,14 +70,13 @@ let applyMoves = (rover) => {
 }
 
 let moveRovers = (rover1, rover2) => {
-  let len1 = rover1.instr.length
-  let len2 = rover2.instr.length
-
+  let dir = ['W','N','E','S']
+  
   rover1 = applyMoves(rover1)
   rover2 = applyMoves(rover2)
 
-  console.log(rover1)
-  console.log(rover2)
+  console.log(rover1.pos, dir[rover1.dir])
+  console.log(rover2.pos, dir[rover2.dir])
 }
 
 moveRovers(rover1, rover2)
