@@ -42,6 +42,7 @@ class Rover {
 
 let rover1 = new Rover([1,2], 1, 'LMLMLMLMM')
 let rover2 = new Rover([3,3], 2, 'MMRMMRMRRM')
+let dir = ['W','N','E','S']
 
 let findNext = (pos, dir) => {
   let move, moves = [[0, -1],[1, 1],[0, 1],[1, -1]]
@@ -70,7 +71,6 @@ let applyMoves = (rover) => {
 }
 
 let moveRovers = (rover1, rover2) => {
-  let dir = ['W','N','E','S']
   
   rover1 = applyMoves(rover1)
   rover2 = applyMoves(rover2)
