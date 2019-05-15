@@ -123,4 +123,3 @@ let reverse = (ar) => {
   console.log(ar)
 }
 reverse(['h','e','l','l','o'])
-
