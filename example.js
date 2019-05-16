@@ -11,7 +11,6 @@ title.style.color = "blue"
 	* querySelectorAll *
 	will look up all items that match the search criteria
 */
-
 //look up all p tags
 let divPs = document.querySelectorAll('p')
 console.log(divPs)
