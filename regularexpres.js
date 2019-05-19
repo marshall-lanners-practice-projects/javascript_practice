@@ -124,6 +124,38 @@ let animalCount = /\b\d+ (pig|cow|chicken)s?\b/;
 console.log(animalCount.test("15 pigs")); // true
 console.log(animalCount.test("15 pigcheckens")); //false
 
+/*
+	the string replace method in javascript can be used
+	with a regular expression to replace string letters
+*/
+
+console.log("Borobudur".replace(/[ou]/, "a")) //Barobudur
+//this will only replace the first occurance of o or u
+
+console.log("Borobudur".replace(/[ou]/g, "a")) //Barabadar
+//this will replace all occurances
+
+//swaping last name and first name
+
+console.log(
+	"liskov, Barbar\nMcCarthy, John\nWadler, Philip"
+	.replace(/(\w+), (\w+)/g, "$2 $1"));
+
+let s = "the cia and fbi";
+console.log(s.replace(/\b(fbi|cia)\b/g, str => str.toUpperCase()));
+
+let stock = "1 lemon, 2 cabbages, and 101 eggs";
+
+function minusOne(match, amount, unit){
+	amount = Number(amount) - 1;
+	if (amount == 1){ // only one left, remove the 's'
+		unit = unit.slice(0, unit.length - 1);
+	} else if (amount == 0){
+		amount = "no";
+	}
+	return amount + " " + unit;
+}
+console.log(stock.replace(/(\d+) (\w+)/g, minusOne))
 
 
 
