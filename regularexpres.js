@@ -157,6 +157,8 @@ function minusOne(match, amount, unit){
 }
 console.log(stock.replace(/(\d+) (\w+)/g, minusOne))
 
+// < - - - - - - - - - - - - - - - youtube tutorial 
+
 
 
 
