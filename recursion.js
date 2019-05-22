@@ -132,8 +132,43 @@ let countStepsDpI = (steps) => {
 	for (i = 3; i <= steps; i++){
 		paths[i] = paths[i - 1] + paths[i - 2] + paths[i - 3]
 	}
-	
 }
+
+
+/*
+	find the maximum depth of a binary tree
+*/
+let left, right
+let maxDepth = (root) => {
+	if (root === null) {return 0}
+	left = maxDepth(root.left)
+	right = maxDepth(root.right)
+	return Math.max(left, right) + 1
+}
+
+
+// change - case to camel case
+
+let data = {
+	"data-one": {"nested-data":, {"more-nested": 'some data'}},
+	"data-tow": 'some data',
+	"data-three": {"nested-data": 'some data'},
+	"data-four": {"nested-data": {"more-nested": {"even-more": 'some data'}}},
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
