@@ -147,15 +147,6 @@ let maxDepth = (root) => {
 }
 
 
-// change - case to camel case
-
-let data = {
-	"data-one": {"nested-data":, {"more-nested": 'some data'}},
-	"data-tow": 'some data',
-	"data-three": {"nested-data": 'some data'},
-	"data-four": {"nested-data": {"more-nested": {"even-more": 'some data'}}},
-}
-
 
 
 
