@@ -187,5 +187,3 @@ rover1 = new Rover([3,3], 3, 'LLRMMa')
 rover2 = new Rover([3,3], 3, 'LMMRMMa')
 grid = [-5,5]
 moveRovers(rover1, rover2, grid)
-
-
