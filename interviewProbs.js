@@ -355,5 +355,122 @@ let isPalindrome = (word) => {
 isPalindrome("racecar"); // true
 isPalindrome("race Car"); // true
 
+// Implement enqueue and dequeue using only two stacks
+// var inputStack = []; // First stack
+// var outputStack = []; // Second stack
+
+/*
+	Implement enqueue and dequeue using only two stacks
+*/
+
+let inputStack = [];
+let outputStack = [];
+
+let enqueue = () => (stackInput, item){
+	return stackInput.push(item);
+}
+
+let dequeue = (stackInput, stackOutput) => {
+	if (stackOutput.length <= 0) {
+		while(stackInput.length > 0){
+			let elementToOutput = stackInput.pop();
+			stackOutput.push(elementToOutput)
+		}
+	}
+	return stackOutput.pop()
+}
+
+/*
+3.2 Create a function that will evaluate if a given expression 
+has balanced parentheses -- Using stacks
+In this example, we will only consider "{}" as valid parentheses {}{} would be considered 
+balancing. {{{}} is not balanced
+*/
+
+var expression = "{{}}{}{}"
+var expressionFalse = "{}{{}";
+
+isBalanced(expression); // true
+isBalanced(expressionFalse); // false
+isBalanced(""); // true
+
+function isBalanced(expression) {
+  var checkString = expression;
+  var stack = [];
+
+  // If empty, parentheses are technically balanced
+  if (checkString.length <= 0) return true;
+
+  for (var i = 0; i < checkString.length; i++) {
+    if(checkString[i] === '{') {
+      stack.push(checkString[i]);
+    } else if (checkString[i] === '}') {
+      // Pop on an empty array is undefined
+      if (stack.length > 0) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+
+  // If the array is not empty, it is not balanced
+  if (stack.pop()) return false;
+  return true;
+}
+
+/*
+	Write a recursive function that returns the binary 
+	string of a given decimal number Given 4 as the 
+	decimal input, the function should return 100
+*/
+
+decimalToBinary(3); //11
+decimalToBinary(8); //1000
+decimalToBinary(1000); //1111101000
+
+let decimalToBinary = (digit) => {
+	if(digit >= 1){
+		if(digit % 2){
+			return decimalToBinary((digit - 1)/2) + 1;
+		} else {
+			return decimalToBinary(digit/2) + 0;
+		} else {
+			return '';
+		}
+	}
+}
+
+/*
+Write a recursive function that performs a binary search
+*/
+
+let target = 8
+let ar = [1,2,3,4,5,6,7,8,9]
+
+let bSearch = (array, target) => {
+  let check = Math.floor((array.length) / 2)
+  console.log(array, check, target)
+
+  if (array[check] === target){
+    return target
+  }
+
+  if (array[check] !== target){
+    if (target > array[check]){
+      bSearch(array.slice(check, array.length), target)
+    }
+    if (target < array[check]){
+      bSearch(array.slice(0, array.length), target)
+    }
+  }
+
+  console.log(target)
+}
+
+
+
+
+
 
 
