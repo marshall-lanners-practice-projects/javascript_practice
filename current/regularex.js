@@ -147,10 +147,224 @@
 	a string method that uses aregular expression or a fixed string to break a string into an array of substrings
 
 
+	if you want to know if a string exists use the test or search methods. 
 
 
 
 
+	//YOUTUBE TUTORIAL//
+
+	. matches everything
+
+	\ will escape things so if you want to look for periods use \.
+
+	\d match any digit (0-9)
+	\D match any none digit (0-9)
+	\w word character (a-z, A-Z, 0-9, _)
+	\W not a word character
+	\s whitespace (space, tab, newline)
+	\S not whitespace (space, tab, newline)
+
+	\b word boundary
+	\B not a word boundary
+	^ beginning of a string
+	$ end of a string
+
+	[] matches characters in brackets
+	[^ ] matches characters not in brackets
+	| either or
+
+
+	how to mach a phone number
+
+	555-555-555
+
+	\d\d\d  // will match any three digits in a row
+
+	\d\d\d. // will match any three digits plus anything after it
+
+	example
+
+	\d\d\d.\d\d\d.\d\d\d. //will match 555-555-555
+
+	want to match only
+
+	555-555-555
+	555.555.555
+
+	\d\d\d[-.]\d\d\d[-.]\d\d\d
+
+	want to match only 800 or 900 numbers
+
+	800-555-555
+	900.555.555
+
+	[89]00[-.]\d\d\d[-.]\d\d\d
+
+	match only numbers 1-7
+
+	1234567 
+
+	[1-7]
+
+	match only lower case letters a-z
+
+	[a-z]
+
+	
+	[a-zA-Z] // will match all lower and capital letters
+
+	[^] will match any character set
+
+	[^a-z] will match any none lower case letter
+
+	match all three letter words end with at but not start with b
+
+	cat
+	mat
+	pat
+	but not bat
+
+	[^b]at
+
+
+	Quantifiers 
+
+	* will match 0 or more
+	+ will match 1 or more
+	? will match 0 or one
+	{3} exact number match
+	{3,4} range of numbers (min, max)
+
+
+
+	easier way to match phone numbers
+
+	555-555-5555
+
+	\d{3}\d{3}\{4}
+
+	
+	look for all Mr then name
+
+	Mr. Schafer
+	Mr smith
+	Mr. T
+
+	Mr\.?\s[A-Z]\w*
+
+	Mr matches literal string
+	\. escapes and matches .
+	? matches zero or one .
+	\s matches a space
+	[A-Z] matches any one captital letters
+	\w any word character
+	* means 0 or more lower case word character in addition
+
+
+		Mr(r|s|rs)\.?\s[A-Z]\w*
+
+		will match 
+		Mr. Schafter
+		mr Smith
+		Ms Davis
+		Mrs. Robinson
+		Mr. T
+
+	CoreyMSchafer@gmail.com
+	corey.schafer@university.edu
+	corey-321-schafer@my-work.net
+
+	[a-zA-Z0-9.-]+@[a-zA-Z-]+\.(com|edu|net)
+
+	https://www.google.com
+	http://coreyms.com
+	https://youtube.com
+	https://www.nasa.gov
+
+	https?://(www\.)?(\w+)(\.w+)
+
+	Group 1: $1 will give us www.
+	Group 2: $2	will give us coreyms, youtube, nasa
+	Group 3: $3 will give us .com, .gov
+
+	$2$3 will give us just the domain names
+
+	example youtube.com
+
+
+	REGEX IN JAVASCRIPT
+
+	const str = "all your base are belong to us"
+	const str2 = "all your base are belong to us"
+	const regex = /base/;
+	const isExisting = regex.test(str) // true
+	const isExisting = regex.test(str2) // false
+	console.log(isExisting);
+
+	has to match base and has to be at the end
+	const regex = /^base$/
+
+	/name is [a-z]/
+
+	? means the value is optional
+
+	cody? // means the y is optional
+
+	$ means the string has ended
+
+	\d+ means match 1 or more arbitrary strings of digits
+
+	\t looks for tabs \n looks for new lines so on
+
+	take out a word from a string in javascript and return it
+
+	cosnt string = "my name is cody"
+	const regex = /name is ([a-z]+)/
+	const match = regex.exec(string)
+	
+	if (match) {
+		const name = match[1];
+		console.log(name)
+	} else {
+		console.log('no match')
+	}
+	console.log(isExisting)
+
+	
+	//look for all values with a group
+
+	const string = "filea.mp3 file_01.mp3 file_02.mp3 test.csv other.txt"
+	const regex = /(\w+)\.mp3/g
+	const match = regex.exec(string)
+
+	while (match){
+		const filename = match[1];
+		console.log(filename);
+		match = regex.exec(string);
+	}
+
+	reg = /a/i
+
+	\ will escape to look for special characters
+
+	<input pattern="\d\d-\d\d-\d\d\d\d" />
+
+	input[type="text"]:invalid {
+		color:red;
+	}
+
+	/0(12|21)/g
+
+	012 021
+
+	/I am (?=great)/
+
+	I am great
+
+	let x = 'I am great'.reaplce(/I am (?=great)/, 'we are ')
+	
+	console.log(x) // "we are great"
 
 */
 

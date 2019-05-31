@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+
+    /* --------------------
+     Add your styling here
+     -------------------- */
+     .container {
+      width: 200px;
+      height: 250px;
+      border: solid black 1px;
+     }
+     .screen {
+      text-align: right;
+      font-size: 25px;
+      border: solid black 1px;
+      width: 180px;
+      margin: 20px auto 0 auto;
+      padding: 2%;
+      box-sizing: border-box;
+     }
+     .buttonContainer {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 20px;
+      width: 150px;
+      margin: 20px auto;
+     }
+     .buttonContainer button {
+      font-size: 25px;
+      border: solid black 1px;
+      border-radius: 6px;
+      background-color: lightgrey;
+      margin: 0 5px 5px 0;
+     }
+     .buttonContainer button:hover{
+      cursor: pointer;
+      background-color: grey;
+     }
+
+    </style>
+</head>
+
+<body>
+  <div class="calculator">
+    <!----------------------
+    Add your markup here
+    ------------------------>
+
+    <!-- container -->
+    <div class="container"> 
+        
+      <div class="screen">
+        
+      </div>
+      <div class="buttonContainer">
+
+        <!--  row 1 -->
+        <button onclick="appendNum(7)">7</button>
+        <button onclick="appendNum(8)">8</button>
+        <button onclick="appendNum(9)">9</button>
+        <button onclick="addOperation('/')">/</button>
+
+        <!-- row 2 -->
+        <button onclick="appendNum(4)">4</button>
+        <button onclick="appendNum(5)">5</button>
+        <button onclick="appendNum(6)">6</button>
+        <button onclick="addOperation('x')">X</button>
+
+        <!-- row 3 -->
+        <button onclick="appendNum(1)">1</button>
+        <button onclick="appendNum(2)">2</button>
+        <button onclick="appendNum(3)">3</button>
+        <button onclick="addOperation('-')">-</button>
+
+        <!-- row 4 -->
+        <button onclick="appendNum(0)">0</button>
+        <button onclick="addOperation('+')">+</button>
+        <button onclick="equals()">=</button>
+        <button onclick="reset()">C</button>
+      <div>
+
+
+      <div>
+
+    </div>
+
+</div>
+<script>
+
+    /* --------------------
+     Add your code here
+    --------------------- */
+    document.querySelector('.screen').innerText = "0"
+
+    let screen = document.querySelector('.screen'), operation = ''
+
+    let reset = () => {
+      screen.innerText = '0'
+      operation = ''
+    }
+
+    let appendNum = (num) => {
+      let end = screen.innerText.slice(-1)
+      let noSecondNum = end === '+' || end === '-' || end === 'x' || end === '/'
+      if (screen.innerText === "0"){
+        screen.innerText = num
+      } else if (noSecondNum){
+        screen.innerText += ' ' + num
+      } else {
+        screen.innerText += num
+      }
+    }
+
+    let addOperation = (toApply) => {
+      if (operation === ''){
+        console.log('ok')
+        screen.innerText += ` ${toApply}`
+        operation = toApply
+      }
+    }
+
+    let equals = () => {
+      let end = screen.innerText.slice(-1),
+      regex = /([0-9]){1,}/g
+      if (operation !== ''){
+        let vals = screen.innerText.match(regex)
+        vals = [Number(vals[0]), Number(vals[1])]
+        switch(operation){
+          case "+":
+            screen.innerText = vals[0] + vals[1]
+            operation = ''
+          break
+          case '-':
+            screen.innerText = vals[0] - vals[1]
+            operation = ''
+          break;
+          case 'x':
+            screen.innerText = vals[0] * vals[1]
+            operation = ''
+          break
+          case '/':
+            screen.innerText = vals[0] / vals[1]
+            operation = ''
+          break
+        }
+      }
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
