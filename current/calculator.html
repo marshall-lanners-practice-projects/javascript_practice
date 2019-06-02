@@ -103,9 +103,14 @@
       operation = ''
     }
 
+    let checkSecond = () => {
+      let end = screen.innerText.slice(-1),
+      noSecondNum = end === '+' || end === '-' || end === 'x' || end === '/'
+      return noSecondNum
+    }
+
     let appendNum = (num) => {
-      let end = screen.innerText.slice(-1)
-      let noSecondNum = end === '+' || end === '-' || end === 'x' || end === '/'
+      let noSecondNum = checkSecond()
       if (screen.innerText === "0"){
         screen.innerText = num
       } else if (noSecondNum){
@@ -123,9 +128,9 @@
     }
 
     let equals = () => {
-      let end = screen.innerText.slice(-1),
+      let noSecondNum = checkSecond()
       regex = /([0-9]){1,}/g
-      if (operation !== ''){
+      if (operation !== '' && !noSecondNum){
         let vals = screen.innerText.match(regex)
         vals = [Number(vals[0]), Number(vals[1])]
         switch(operation){
