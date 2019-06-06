@@ -7,3 +7,6 @@ let swap = () => {
 	end.style.backgroundImage = "url('pawn.png')"
 }
 
+/*
+
+*/
