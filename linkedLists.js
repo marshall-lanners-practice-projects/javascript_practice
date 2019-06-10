@@ -124,6 +124,27 @@ class LinkedList {
     this.size--
   }
 
+  
+  removeDups(){
+    if (this.size === 0 || this.size === 1){
+      console.log('no duplicates to remove')
+      return
+    }
+    let hash = {}
+    let current = this.head, prev
+
+    while(current){
+      if (hash[current.element] === 1){
+        prev.next = current.next
+        current = current.next
+      } else {
+        hash[current.element] = 1
+        prev = current
+        current = current.next
+      }
+    }
+  }
+
 }
 
 let l1 = new LinkedList()
