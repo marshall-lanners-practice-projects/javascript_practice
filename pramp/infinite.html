@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Scroll</title>
+    <style>
+    /* --------------------
+     Add your styling here
+     -------------------- */
+
+     .picsContainer {
+      max-width: 600px;
+      margin: 20px 0 20px 20px;
+      min-height: 800px;
+     }
+
+     .imgAdorable {
+      display:block;
+      width: 200px;
+      height: 200px;
+      margin-right: 5px;
+     }
+
+     .picSection {
+      display: flex;
+      margin-top: 10px;
+     }
+
+    </style>
+</head>
+<body>
+
+<div class="picsContainer">
+  <div class="picSection">
+    <img class="imgAdorable" src="http://api.adorable.io/avatars/5000"/>
+    <img class="imgAdorable" src="http://api.adorable.io/avatars/500"/>
+    <img class="imgAdorable" src="http://api.adorable.io/avatars/50"/>
+    <img class="imgAdorable" src="http://api.adorable.io/avatars/5"/>
+  </div>
+</div>
+
+<script>
+  
+  let finished = true
+
+  let imageDiv = () => {
+
+    let gif = document.getElementById('giphy')
+    gif.parentElement.removeChild(gif)
+
+    let ar = [], str, img, random, 
+
+    picsDiv = document.createElement('div')
+    picsDiv.className = "picSection"
+
+    for (let i = 0; i < 4; i++){
+      random = Math.floor((Math.random() * 5000) + 1)
+      str = `http://api.adorable.io/avatars/${random}`
+      let img = document.createElement('img')
+      img.src = str
+      img.className = "imgAdorable"
+      picsDiv.appendChild(img)
+    }
+
+    let toAppend = document.querySelectorAll('.picsContainer')
+    toAppend = toAppend[toAppend.length - 1]
+
+    toAppend.appendChild(picsDiv)
+    finished = true
+  }
+
+  let main = () => {
+    finished = false
+    let toAppend = document.querySelectorAll('.picsContainer')
+    toAppend = toAppend[toAppend.length - 1]
+    let gif = document.createElement('img')
+    gif.src = 'giphy.gif'
+    gif.id = 'giphy'
+    toAppend.appendChild(gif)
+    setTimeout(imageDiv, 1500);
+
+    let w = window
+    console.log(w.pageYOffset)
+  }
+
+  window.onscroll = () => {
+    let d = document.documentElement;
+    let offset = d.scrollTop + window.innerHeight;
+    let height = d.offsetHeight;
+
+    if (offset >= height && finished){
+      main()
+    }
+  }
+
+
+</script>
+
+</body>
+</html>
