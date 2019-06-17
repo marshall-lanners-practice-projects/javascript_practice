@@ -76,7 +76,3 @@ for (let node of document.body.childNodes) {
 
 // For all nodes: parentNode, childNodes, firstChild, lastChild, previousSibling, nextSibling.
 // For element nodes only: parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling.
-
-
-
-
