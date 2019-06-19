@@ -1,0 +1,42 @@
+.home-heading {
+	display: flex;
+	border: solid black 1px;
+	padding: 20px;
+	background-color: #c5c5c5;
+	align-items: center;
+}
+
+.home-heading h1 {
+	margin: 0px 3% 0 3%;
+	font-size: 2rem;
+}
+
+.home-heading p {
+	font-size: 1.4rem;
+}
+
+.home-nav {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	border: solid black 1px;
+}
+
+.nav-section {
+	padding: 2.5%;
+	border: solid black 1px;
+	margin-right:1%;
+}
+
+.nav-section:hover{
+	background-color: #5b9aa0;
+}
+
+.nav-section ul {
+	display: none;
+}
+
+.home-container {
+	margin: 30px 4.3%;
+}
+
