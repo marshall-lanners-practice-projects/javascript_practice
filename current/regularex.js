@@ -1,3 +1,34 @@
+regex = /^(?!.*optimize).*sitespect.*$/
+
+let pathname = window.location.pathname
+
+let title = pathname.split('/')[1]
+let id = pathname.split('/')[2]
+
+let item = document.querySelector('[itemprop=name]').innerText
+let price = document.querySelector('.price').innerText
+let u = document.querySelector('.colors').innerText
+let splited = u.split('\n')
+
+let getAr = (ar) => {
+  let added = new Set([])
+  let newAr = []
+  
+  ar.forEach(item => {
+    if (!added.has(item) && item !== "Select A Color"){
+      newAr.push(item)
+    }
+    added.add(item)
+  })
+
+  return newAr
+
+}
+
+let filteredAr = getAr(splited)
+
+
+
 /*
 
 	Anchors ^ and $
@@ -115,6 +146,7 @@
 	d(?!r) matches a d only if is not followed by r, but r will not be part of the overall regex match
 	(?<!r)d matches a d only if is not preceded by an r, but r will not be part of the overall regex match
 */
+
 
 /*
 	in Javascript
@@ -236,8 +268,6 @@
 	{3} exact number match
 	{3,4} range of numbers (min, max)
 
-
-
 	easier way to match phone numbers
 
 	555-555-5555
@@ -291,7 +321,6 @@
 	$2$3 will give us just the domain names
 
 	example youtube.com
-
 
 	REGEX IN JAVASCRIPT
 
@@ -368,6 +397,14 @@
 
 */
 
+    let pathname = window.location.pathname
+    let url = window.location.href
+    let title = pathanme.split('/')[1]
+    let id = pathname.split('/')[2]
+    let item = document.querySelector('[itemprop=name]').innerText
+    let price = document.querySelector('.price').innerText
+    let colors = document.querySelector('.colors').innerText
+    let splited = colors.split('\n')
 
 
 

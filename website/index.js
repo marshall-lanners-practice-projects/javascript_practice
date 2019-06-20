@@ -1,12 +1,11 @@
-let image 
-let start = document.querySelector('#a2')
-let end = document.querySelector('#a4')
-start.style.backgroundImage = "url('pawn.png')"
-let swap = () => {
-	start.style.backgroundImage = ''
-	end.style.backgroundImage = "url('pawn.png')"
+let spans = document.querySelectorAll('span')
+
+let regex = /help/i
+
+for (let i = 0; i < spans.length; i++){
+    let bool = regex.test(spans[i].innerText)
+    
+    if (bool === true){
+        console.log(spans[i].innerText)
+    }
 }
-
-/*
-
-*/
