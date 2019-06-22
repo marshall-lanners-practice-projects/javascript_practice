@@ -18,3 +18,5 @@ Regards,
 Marshall Lanners
 
 */
+
+console.log(this)

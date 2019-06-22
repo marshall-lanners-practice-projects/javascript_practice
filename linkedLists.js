@@ -163,3 +163,122 @@ l1.insertAt(155, 2)
 l1.log()
 l1.removeAt(2)
 l1.log()
+
+
+// ----------------------
+
+/*
+  combine two sorted link lists
+*/
+
+class Node {
+  constructor(element){
+    this.element = element
+    this.next = null
+  }
+}
+
+class LinkedList {
+  constructor(){
+    this.head = null
+    this.size = 0
+  }
+
+  add(element){
+    let node = new Node(element)
+    if (this.size === 0){
+      this.head = node
+    } else {
+      let current = this.head, prev
+      while(current){
+        prev = current
+        current = current.next
+      }
+      prev.next = node
+    }
+    this.size++
+  }
+
+  deleteStart(){
+    if (this.size === 0){
+      return
+    } else {
+      let current = this.head
+      this.head = current.next
+    }
+    this.size--
+  }
+
+  peek(){
+    if (this.size === 0){
+      return
+    } else {
+      let current = this.head, prev
+      while(current){
+        prev = current
+        current = current.next
+      }
+      return prev
+    }
+  }
+
+  log(){
+    let current = this.head
+    let str = ''
+
+    if (this.size === 0){
+      return
+    }
+
+    while(current){
+      str += current.element + ' '
+      current = current.next
+    }
+
+    return str
+  }
+
+}
+
+let l1 = new LinkedList()
+l1.add(1)
+l1.add(3)
+l1.add(5)
+l1.add(10)
+l1.add(15)
+
+let l2 = new LinkedList()
+l2.add(-1)
+l2.add(2)
+l2.add(3)
+l2.add(4)
+
+let mergeSorted = (l1, l2) => {
+  let l3 = new LinkedList()
+  
+  while(true){
+
+    if (l1.head === null){
+      l3.peek().next = l2.head
+      return l3
+    }
+
+    if (l2.head === null){
+      l3.peek().next = l1.head
+      return l3
+    }
+
+    if (l1.head.element <= l2.head.element){
+      l3.add(l1.head.element)
+      l1.deleteStart()
+    } else {
+      l3.add(l2.head.element)
+      l2.deleteStart()
+    }
+  }
+
+}
+
+let l3 = mergeSorted(l1, l2)
+
+l3.log()
