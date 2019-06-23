@@ -81,6 +81,23 @@
 	end up with an infinite loop.
 */
 
+//Example problems
+
+/*
+	the matrix shows which nodes are connected to one anther
+	for example node at index 0 is connected to node 1, 2, and 3
+
+*/
+
+let ajsMatrix = [
+	[0, 1, 1, 1, 0],
+	[0, 0, 1, 0, 0],
+	[1, 1, 0, 0, 0],
+	[0, 0, 0, 1, 0],
+	[0, 1, 0, 0, 0]
+]
+
+
 
 
 
