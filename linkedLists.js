@@ -282,3 +282,5 @@ let mergeSorted = (l1, l2) => {
 let l3 = mergeSorted(l1, l2)
 
 l3.log()
+
+
