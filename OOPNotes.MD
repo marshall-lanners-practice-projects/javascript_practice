@@ -125,8 +125,77 @@ in node the global object is global, and in the browser the global object is the
 
 if you use the new keyward when making a new object with either a class or a constructor function THIS will be bound to an object that was passed as an invisible paramter to your function call.
 
+each object has a constructor property and that referances the function that was used to create that object
+
+functions themselves in javascript are objects that are made with the constructor function
+
+call, apply
+
+getter is a function that is used to read a property
+
+use 
+
+Object.defineProperty to define getters and setters
+
+classical vs prototypical
+
+when you hear prototype just think parent
+
+and it enherits all the members in its prototype
+
+its first property will be constructor which referances the function that was used to create the object.
+
+every object we make in javascript directly or indirectly inherits from the base object which gives it a series of properties and methods. It is the root of all objects in javascript and it does not have a prototype or parent.
+
+let x = {}
+
+Object.getPrototypeOf(x)
+
+will return base object which has no prototype
+
+__proto__ is depreicated so don't use it anymore in code, but ok when you are debuggin your applications
+
+when you call a method or property on an object if javascript can't find it, it will check the prototype of that object
+
+a prototype is just a regular object in memory, every object has a prototype or parent except the root object
 
 
+arrays inherit from a base array prototype that gives us such methods as push or pop
+
+let ar = []
+
+ar inheritis from arraybase and arraybase inherits from object base
+
+this is multiplevel inheritance
+
+objects created from a given constructor will have the same prototype
+
+keep inheritance to one level and never go any lower or else your projects will become far to complex and brittle
+
+example mixins
+
+const canEat = {
+	eat: function(){
+		this.hunger--
+		console.log('eating')
+	}
+}
+
+const canWalk = {
+	walk: function() {
+		console.log('walking')
+	}
+}
+
+function Person(){
+	
+}
+
+Object.assign(Person.prototype, canEat, canWalk)
+
+const person = new Person
+
+console.log(person)
 
 
 
