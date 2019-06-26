@@ -197,17 +197,211 @@ const person = new Person
 
 console.log(person)
 
+making private methods and properties on a class in es6
+
+```javascript
+const _radius = Symbol();
+const _draw = Symbol(); 
+
+
+class Circle {
+	constructor(radius){
+		this[_radius] = radius
+	}
+
+	[_draw](){
+
+	}
+}
+```
+
+new WeakMap()
+
+What is a code smell? A code smell is when you have a peice of code that itself could look confusing from someone. Below is a few examples of how to help eliminate code smells.
+
+examples of code smells
+
+variable declarations that are either too short or too long
+variable declarations that do not give meaning to what is going on
+
+functions that do more than one thing
+
+functions that have more than 3 parameters
+
+avoid output parameters and return an object from a method instead
+
+declare variables close to thier usage
+
+avoid magic numbers, eg varaibles to numbers to don't give a clear idea as what they are about
+
+avoid nested conditionals (if statements). You can help lower the amount of nested conditionals by using the logical && operator. You can also assigne variables to a conditional. Also, its great to use the ternary operator, but don't go more than one level with the turnary because then its hard to follow.
+
+let b = 5, y = 4, c
+
+//bad nested conditional
+if (b > 3){
+  if (y < 10){
+    console.log('its true bad version')
+  }
+}
+
+//setting conditional to a variable
+let x = b > 3 && y < 10
+
+
+if (x) console.log('its true good version')
+
+//example of using a turnary
+b > 3 && y < 10 ? (c = true) : c = false
+
+
+console.log(`c: ${c}`)
+
+refactor out long ugly switch statements with polymorphism
+
+avoid duplicate code, try to exercise DRY: don't, repeat, yourself
+
+
+comments:
+
+don't state the obvious
+
+//returns the customers
+let returnCustomers = () => {
+	
+}
+
+the best comment is the code itself. The code should be so clean and so easy to follow that there is little to no need for comments at all. Comments relating to version history or dates of changes so as on this date so and so made a change and so on.
+
+Comments that help clearify code that could just be renamed.
+
+let pa = 19.99 // pay amount
+
+why not just rename the variable?
+
+let payAmount = 19.99
+
+dead code
+
+```javascript
+/*
+	class Node {
+		constructor(number){
+			this.number = number
+		}
+	}
+*/
+```
+
+just delete the dead code. You can always put it bad from your source code repository.
+
+Comments are good when you have problems in the code that need to be worked out, there are some constraits that are messing things up maybe because of legacy reasons, maybe a problem in the database, maybe a third party component
+
+Write comments to describe whys and hows, but not whats, the code should be self descritive enough to describe what it is doing.
+
+don't write comments, re-write your code
+don't explain "whats" (the obvious)
+Explain "whys" and "hows"
+
+
+long methods
+
+a long method is more than 10 lines of code!
+
+long method are:
+
+hard to change
+hard to understand
+hard to re-use
+
+it is best to have your method specialize in one thing,
+when it become too long we suffer form jack of all trades syndrome
+like a chief who is also a manager who is also an accountant
+
+things that are related should be together and things that are not related
+should not be together
+
+same theory relates to making classes
+
+we then adhear to the single responsibilty principal
+
+
+Solid Principlal
+
+S - Single Responsibility
+
+A class/function should have only one reason to change. Meaning that the class/function should have only one job. When your function is doing more than one thing its time to make another function. This will ensure that your code is readable, testable, reusable, and maintainable.
+
+O - Open Close Principle
+
+Software entities (classes, modules, functions, ect.) should be
+open for extension, but closed for modification. New features can be added without introducing new bugs. You can add new features by extending or writing new conde without modifying old code. Benefits Agile and Reliable.
+
+L - Liskove Substitution
+
+Ability to replace any instace of a parent class with an instane of one of its child classes without negative side effects.
+If you cann't substitude a child class for its parent and your is still functional then your in violaction of this rule. A child class is only ment to extend the behavior of the parent. It should not be altering the behavior.
+
+Example of violation
+
+class Square extends Rectangle
+
+A square has an equal width and height while a rectangle has a different width and height.
+
+
+Better Example
+
+class Square extends Shape
+
+the only thing the square class does is adds functionality to shape.
+
+I - interface segregation principle
+
+A client should never be forced to implement an interface that it doesn't use or clients shouldn't be forced to depend on methods they do not use.
+
+example 
+
+interface IColors {
+	paintRed();
+	paintYellow();
+	paintBlue();
+}
+
+```javascript
+class Red implements IColors {
+
+	/* red now has but it only needs paintRed
+	paintRed(){
+	}
+
+	paintYellow(){
+	}
+
+	paintBlue(){
+
+	}
+	*/
+}
+```
+IRed {
+	paintRed()
+}
+
+class Red extends IRed {
+	//now red does not have undeeded functions
+}
 
 
 
+D - Dependency Inversion Principle
 
+High level objects should not depend on low level implementations. Both should depend of abstrations. Interfaces and abstract classes are considered high level resources. A concrete class is considered a low level resource.
 
+example
 
-
-
-
-
-
+Button  ->   SwitchableDevice	 <- Lamp
+push()			 turnOff()				 <- Fan
+						 turnOn()					 <- TV
 
 
 
