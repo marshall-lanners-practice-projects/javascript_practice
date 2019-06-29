@@ -6,7 +6,6 @@
 	A graph models a sec of connections. For example, suppose you and
 	your friends are playing poker, and you want to model who owes whom money.
 	Here's how you could say, "Alex owes Rama money"
-
 	alex -> Rama
 
 	the graph is made up of nodes and edges
