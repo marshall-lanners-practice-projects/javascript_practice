@@ -5,7 +5,6 @@ class Rover {
     this.instr = instr
   }
 }
-
 let dir = ['W','N','E','S'], 
 south = 3, west = 0,
 rover1, rover2
