@@ -6,7 +6,6 @@ let ar = [1,2,3,4]
 for (let i = 0; i < ar.length; i++){
 	console.log(ar[i])
 }
-
 //loop down an arry
 for (let i = ar.length - 1; i >= 0; i--){
 	console.log(ar[i])
