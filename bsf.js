@@ -8,7 +8,6 @@
 	Here's how you could say, "Alex owes Rama money"
 	alex -> Rama
 	the graph is made up of nodes and edges
-
 	a node can be directly connected to many other nodes which are called neighbors.
 
 	doing BFS
