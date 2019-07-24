@@ -5,6 +5,7 @@
 let title = document.querySelector('h1')
 console.log(title)
 title.style.color = "blue"
+
 /*
 	* querySelectorAll *
 	will look up all items that match the search criteria
