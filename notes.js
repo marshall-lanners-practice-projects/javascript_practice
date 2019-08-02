@@ -10,7 +10,6 @@ for (let i = 0; i < ar.length; i++){
 for (let i = ar.length - 1; i >= 0; i--){
 	console.log(ar[i])
 }
-
 //example while loops
 let x = 0
 let y = ar.length - 1
