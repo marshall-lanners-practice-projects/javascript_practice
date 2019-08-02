@@ -65,7 +65,6 @@ for (let node of document.body.childNodes) {
 }
 
 // The <table> element supports (in addition to the given above) these properties:
-
 // table.rows – the collection of <tr> elements of the table.
 // table.caption/tHead/tFoot – references to elements <caption>, <thead>, <tfoot>.
 // table.tBodies – the collection of <tbody> elements (can be many according to the standard).
