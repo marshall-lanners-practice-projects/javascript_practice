@@ -251,4 +251,169 @@ const findDup = (ar) => {
 
 findDup([1,2,3,5,11,1,24,7])
 
+/*
+  You're given strings J representing the types of stones that are 
+  jewels, and S representing the stones you have.  
+  Each character in S is a type of stone you have.  
+  You want to know how many of the stones you have are also jewels.
+
+  The letters in J are guaranteed distinct, and all characters 
+  in J and S are letters. Letters are case sensitive, so "a" is 
+  considered a different type of stone from "A".
+*/
+
+
+var numJewelsInStones = function(J, S) {
+    const set = new Set(J.split(''))
+    let count = 0
+    for (let i = 0; i < S.length; i++){
+        if (set.has(S[i])) count++
+    }
+    return count
+};
+
+/*
+  write a function that checks if two strings are an anagram
+  same letters just scrambled
+*/
+
+var isAnagram = function(s, t) {
+    
+    const hash1 = {}, hash2 = {}
+    if (s.length != t.length) return false
+    
+    for (let i = 0; i < s.length; i++){
+        hash1[s[i]] ? hash1[s[i]]++ : hash1[s[i]] = 1
+        hash2[t[i]] ? hash2[t[i]]++ : hash2[t[i]] = 1
+    }
+    
+    for (let i = 0; i < s.length; i++){
+        if (hash1[s[i]] !== hash2[s[i]]) return false
+    }
+    
+    return true
+    
+};
+
+/*
+  Given a string containing just the characters 
+  '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+  An input string is valid if:
+
+  Open brackets must be closed by the same type of brackets.
+  Open brackets must be closed in the correct order.
+  Note that an empty string is also considered valid.
+
+  Example 1:
+
+  Input: "()"
+  Output: true
+*/
+
+var isValid = function(s) {
+    let map = { ")": "(", "]": '[', "}": "{"}
+    let stack = []
+    for (let i = 0; i < s.length; i++){
+        if (s[i] === "(" || s[i] === "[" || s[i] === "{"){
+            stack.push(s[i])
+        } else {
+            if (stack.pop() !== map[s[i]]){
+                return false
+            }
+        }
+    }
+    return stack.length === 0
+};
+
+/*
+  implement a Queue using two stacks
+*/
+
+var MyQueue = function() {
+    this.stack = []
+    this.revStack = []
+};
+
+/**
+ * Push element x to the back of queue. 
+ * @param {number} x
+ * @return {void}
+ */
+MyQueue.prototype.push = function(x) {
+    this.stack.push(x)
+};
+
+/**
+ * Removes the element from in front of queue and returns that element.
+ * @return {number}
+ */
+MyQueue.prototype.pop = function() {
+   while(this.stack.length){
+       this.revStack.push(this.stack.pop())
+   }
+   let first = this.revStack.pop()
+   while(this.revStack.length){
+       this.stack.push(this.revStack.pop())
+   }
+   return first
+};
+
+/**
+ * Get the front element.
+ * @return {number}
+ */
+MyQueue.prototype.peek = function() {
+    return this.stack[0]
+};
+
+/**
+ * Returns whether the queue is empty.
+ * @return {boolean}
+ */
+MyQueue.prototype.empty = function() {
+   return this.stack.length === 0
+};
+
+
+/*
+  You are given a sorted array of N integers from 1 to N 
+  with one number missing. For example, you are given 
+  {1, 3, 4, 5}, and N = 5, the missing number is 2. 
+  Find the missing number.
+*/
+
+const findMissingNumber = (arr, n) => {
+
+  let start = 0, end = arr.length - 1;
+
+  while (start <= end) {
+    const mid = Math.floor((start + end) / 2);
+
+    if (
+      (arr[mid + 1] && arr[mid] + 1 !== arr[mid + 1]) ||
+      (mid === arr.length - 1 && arr[mid] !== n)
+    ) {
+      return mid + 2;
+    }
+
+    if (
+      arr[mid] - 1 !== arr[mid - 1] ||
+      (mid == 0 && arr[mid] !== 1)
+    ) {
+      return mid + 1;
+    }
+
+    if (arr[mid] != mid + 1) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
+    }
+  }
+
+  return null;
+};
+
+findMissingNumber([1,2,3,4,5,6,7,9,10], 10)
+
 
