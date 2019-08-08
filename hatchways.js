@@ -44,23 +44,6 @@ const ar = [1,2,3,5,6,7,10,11,12,15,25,26,27]
 console.log(findConsecutive(ar))
 
 
-
-var longestWord = function(ar) {
-    ar.sort()
-    let set = new Set(ar)
-    let current = ''
-    ar.forEach(w => {
-        let valid = true
-        let key = ''
-        for (let i = 0; i < w.length; i++){
-            key += w[i]
-           !set.has(key) && (valid = false)
-        }
-        valid && (w.length > current.length) && (current = w)
-    })
-    return current
-};
-
 /*
 	Given a list of strings words representing an English Dictionary, 
 	find the longest word in words that can be built one character at 
@@ -414,6 +397,118 @@ const findMissingNumber = (arr, n) => {
   return null;
 };
 
+
 findMissingNumber([1,2,3,4,5,6,7,9,10], 10)
+
+/*
+  flatten an object
+  input:  { a: "b", c: { d: "e"}}
+  output: { a: "b", "c.d": "e"}
+*/
+
+let obj = { a: "b", c: { d: {e: 'f'}, q: {w: 'z'}} }
+
+const flatten = (obj, key, output = {}) => {
+  for (let k in obj){
+    const builtKey = key ?  `${key}.${k}` : k
+    if (typeof obj[k] === 'string'){
+      output[builtKey] = obj[k]
+    } else {
+      flatten(obj[k], builtKey, output)
+    }
+  }
+  return output
+}
+
+flatten(obj)
+
+/*
+  given a number n 
+  find its value in the Fibonacci sequence
+  1,1,2,3,5,8,13,21,34 . . . 
+*/
+
+const fib = (n) => {
+  if (n <= 1) {return n}
+  return fib(n - 1) + fib(n - 2)
+}
+
+fib(9)
+
+/*
+  given a number n 
+  find its value in the Fibonacci sequence
+  1,1,2,3,5,8,13,21,34 . . . 
+*/
+
+// array solution
+
+const fib = (n) => {
+  const ar = []
+  ar[0] = 1
+  ar[1] = 1
+  for (let i = 2; i < n; i++){
+    ar[i] = ar[i - 1] + ar[i - 2]
+  }
+  return ar[n - 1]
+}
+
+fib(9)
+
+
+/*
+  find the minimum sum path of items leading up to the bottom
+  right corner of the graph
+*/
+
+var minPathSum = function(grid) {
+
+    //get min path sum for first row
+    
+    for (let i = 1; i < grid[0].length; i++){
+        grid[0][i] += grid[0][i - 1]
+    }
+    
+    //get min path for first column
+    
+    for (let i = 1; i < grid.length; i++){
+        grid[i][0] += grid[i - 1][0]
+    }
+    
+    //use this to build out the rest of the grid
+    
+    for (let i = 1; i < grid.length; i++){
+        for (let j = 1; j < grid[i].length; j++){
+            grid[i][j] += Math.min(grid[i][j - 1], grid[i - 1][j])
+        }
+    }
+    
+    //return item in bottom right corner of grid
+    
+    return grid[grid.length - 1][grid[0].length - 1]
+    
+};
+
+/*
+  You are a robber planning to rob houses along a street. 
+  Each house has a certain amount of money stashed. 
+  However, you cannot rob any two adjacent houses.
+*/
+
+const rob = function(nums) {
+    
+  let previous = 0
+  let beforePrev = 0
+  
+  for (let i = 0; i < nums.length; i++){
+      let tmp = previous;
+      previous = Math.max(nums[i] + beforePrev, previous)
+      beforePrev = tmp;
+      console.log(previous, beforePrev)
+  }
+  return previous  
+};
+
+
 
 
