@@ -509,6 +509,36 @@ const rob = function(nums) {
   return previous  
 };
 
+/* 
+  Input: arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}
+  Output: 3 (1-> 3 -> 8 ->9)
 
+  First element is 1, so can only go to 3. Second element is 3, so can make at most 3 steps eg to 5 or 8 or 9.
+*/
+const ar = [1, 3, 1, 1, 6, 1, 1, 1, 1, 1, 1]
+
+
+function jump(nums) {
+    var max = 0;
+    var nextMax = 0;
+    var jumps = 0;
+
+    nums.some((v, i) => {
+        if (max >= nums.length - 1) {
+            return true;
+        }
+
+        nextMax = Math.max(i + v, nextMax);
+        
+        if (i === max) {
+            max = nextMax;
+            jumps++;
+        }
+    });
+    
+    return jumps;
+}
+
+jump(ar)
 
 
