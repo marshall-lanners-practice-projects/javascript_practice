@@ -18,7 +18,6 @@ Marshall Lanners
 
 */
 
-
 console.log(this)
 
 import React from 'react';

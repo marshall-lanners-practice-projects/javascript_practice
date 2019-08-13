@@ -110,7 +110,9 @@ var toGoatLatin = function(S) {
   Input : arr = [2, 3, 10, 6, 4, 8, 1]
   Output : 8
   Explanation : The maximum difference is between 10 and 2
-  Given an array arr[] of integers, find out the maximum difference between any two elements such that larger element appears after the smaller number.
+  Given an array arr[] of integers, find out the maximum 
+  difference between any two elements such that 
+  larger element appears after the smaller number.
 */
 
 const findMin = () => {
@@ -153,9 +155,11 @@ let binary_search = (ar, target) => {
 binary_search(ar, target)
 
 /*
-bubble sort
-The bubble sort algorithm loops through the array and keeps swapping values from left to right
-until based on which value is bigger and continues to do some while there is values to swap 
+  bubble sort
+  The bubble sort algorithm loops through the 
+  array and keeps swapping values from left to right
+  until based on which value is bigger and 
+  continues to do some while there is values to swap 
 */
 
 // array to sort
