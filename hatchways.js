@@ -519,6 +519,7 @@ const rob = function(nums) {
 
   First element is 1, so can only go to 3. Second element is 3, so can make at most 3 steps eg to 5 or 8 or 9.
 */
+
 const ar = [1, 3, 1, 1, 6, 1, 1, 1, 1, 1, 1]
 
 
@@ -544,5 +545,176 @@ function jump(nums) {
 }
 
 jump(ar)
+
+/*
+  Given a non-empty 2D array grid of 0's and 1's, an island 
+  is a group of 1's (representing land) connected 4-directionally 
+  (horizontal or vertical.) You may assume all four edges of the 
+  grid are surrounded by water. Count the number of 
+  islands in the given 2D array.
+*/
+
+const matrix = [
+    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+];
+
+const maxArea = (matrix) => {
+
+  const dfs = (matrix, i, j) => {
+
+    if (
+      i < 0 ||
+      i > matrix.length - 1 ||
+      j < 0 ||
+      j > matrix[i].length - 1 ||
+      matrix[i][j] === 0
+    ){
+      return 0
+    }
+    
+    matrix[i][j] = 0
+    let count = 1
+    count += dfs(matrix, i + 1, j)
+    count += dfs(matrix, i - 1, j)
+    count += dfs(matrix, i, j + 1)
+    count += dfs(matrix, i, j - 1)
+    return count
+  }
+
+  let max = 0
+  for (let i = 0; i < matrix.length - 1; i++){
+    for (let j = 0; j < matrix[i].length - 1; j++){
+      if (matrix[i][j] === 1){
+        max = Math.max(max, dfs(matrix, i, j))
+      }
+    }
+  }
+  return max
+}
+
+maxArea(matrix)
+
+
+/*
+  find the longest common prefix in a list of words in an array
+  if there might be more than one common prefix
+*/
+
+const ar = ['canadian', 'electricity', 'electrician', 'canada']
+
+const longestCommonPrefix = strs => {
+
+  if (strs.length === 0) return ''
+  let current = ''
+  let prefix = ''
+  strs = strs.sort()
+
+  for (let i = 0; i < ar.length - 1; i++){
+    for (let j = 0; j < ar[i].length; j++){
+      if (ar[i][j] === ar[i + 1][j]){
+        current += ar[i][j]
+      } else {
+        current.length > prefix.length && (prefix = current)
+        current = ''
+      }
+    }
+  }
+  return prefix   
+};
+
+longestCommonPrefix(ar)
+
+/*
+  find the common prefix in a list of words if there is only
+  one common prefix
+*/
+
+const ar = ["flower","flow","flight"]
+
+const longestCommonPrefix = strs => {
+    if (strs.length === 0) return ''
+    let prefix = ''
+    
+    for (let i = 0; i < strs[0].length; i++){
+        const character = strs[0][i]
+        for (let j = 0; j < strs.length; j++){
+            if (strs[j][i] !== character) return prefix
+        } 
+        prefix = prefix + character
+    }
+    return prefix
+};
+
+longestCommonPrefix(ar)
+
+
+const comments = [
+  { id: 1, body: "Comment 1", parent: 3 },
+  { id: 2, body: "Comment 2", parent: 1 },
+  { id: 3, body: "Comment 3", parent: null },
+  { id: 4, body: "Comment 4", parent: 5 },
+  { id: 5, body: "Comment 5", parent: null },
+  { id: 6, body: "Comment 6", parent: 5 },
+  { id: 7, body: "Comment 7", parent: 1 }
+];
+
+/*
+  Comment 3
+    Comment 1
+      Comment 2
+      Comment 7
+  Comment 5
+    Comment 4
+    Comment 6
+*/
+
+
+const printComments = comments => {
+  const mapping = restructureComments(comments);
+  // go through all the comments without a parent
+  for (let c of mapping[null].children) {
+    printComment(mapping[c], mapping, "");
+  }
+};
+
+// recursively print the comments
+const printComment = (comment, mapping, tab) => {
+  console.log(`${tab}${comment.body}`);
+  for (let child of mapping[comment.id].children) {
+    printComment(mapping[child], mapping, tab + "  ");
+  }
+};
+
+const restructureComments = comments => {
+  const commentsMapping = {};
+  for (let comment of comments) {
+    if (commentsMapping[comment.id]) {
+      commentsMapping[comment.id].body = comment.body;
+      commentsMapping[comment.id].parent = comment.parent;
+    } else {
+      commentsMapping[comment.id] = comment;
+      commentsMapping[comment.id].children = [];
+    }
+
+    if (commentsMapping[comment.parent]) {
+      commentsMapping[comment.parent].children.push(comment.id);
+    } else {
+      commentsMapping[comment.parent] = {
+        id: comment.parent,
+        children: [comment.id]
+      };
+    }
+  }
+  return commentsMapping;
+};
+
+
 
 
