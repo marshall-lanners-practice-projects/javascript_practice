@@ -654,7 +654,6 @@ const longestCommonPrefix = strs => {
 
 longestCommonPrefix(ar)
 
-
 const comments = [
   { id: 1, body: "Comment 1", parent: 3 },
   { id: 2, body: "Comment 2", parent: 1 },
@@ -714,6 +713,149 @@ const restructureComments = comments => {
   }
   return commentsMapping;
 };
+
+/*
+  make a linked list with array like functionality
+  and with the ability to be reversed
+*/
+
+class LinkedList {
+  constructor(){
+    this.head = null
+    this.size = 0
+  }
+
+  push(val){
+    const node = new Node(val)
+    if (this.size === 0) {
+      this.head = node
+      this.size++
+    } else {
+      let current = this.head, prev
+      while(current){
+        prev = current
+        current = current.next
+      }
+      prev.next = node
+      this.size++
+    }
+  }
+
+  unshift(val){
+    const node = new Node(val)
+    if (this.size === 0){
+      this.head = node
+    } else {
+      let temp = this.head
+      node.next = temp
+      this.head = node
+      this.size++
+    }
+  }
+
+  log(){
+    if (this.size === 0) {
+      return 'No Nodes'
+    } else {
+      let str = ''
+      let current = this.head
+      while(current){
+        str += `${current.val} -> `
+        current = current.next
+      }
+      str += 'null'
+      console.log(str)
+    }
+  }
+
+  insert(val, index){
+    if (index < 0 || index > this.size){
+      console.log('index outside linked list')
+      return
+    }
+    let i = 1
+    let current = this.head, prev
+    while (i < index){
+      prev = current
+      current = current.next
+      i++
+    }
+    const node = new Node(val)
+    prev.next = node
+    node.next = current
+    this.size++
+  }
+
+  pop(){
+    if (this.size === 0) return 'empty'
+    if (this.size === 1){
+      let popped = this.head.val
+      this.head = null
+      this.size--
+      return popped
+    }
+
+    let current = this.head, prev
+    while(current.next){
+      prev = current
+      current = current.next
+    }
+
+    let popped = current.val
+    prev.next = null
+    this.size--
+    return popped
+  }
+
+  shift(){
+    if (this.size === 0) return 'empty'
+    let shifted = this.head.val
+    this.head = this.head.next
+    this.size--
+    return shifted
+  }
+
+  deleteAt(index){
+    if (index < 0 || index > this.size) {
+      return 'outside linked List'
+    }
+
+    if (index === 1){
+      this.head = this.head.next
+      this.size--
+      return
+    }
+    let i = 1
+    let current = this.head, prev
+    while(i < index){
+      prev = current
+      current = current.next
+      i++
+    }
+
+    prev.next = current.next
+    this.size--
+  }
+
+  reverse(){
+    if (this.size === 0) return 'empty'
+    let current = this.head, prev = null, next
+    while(current){
+      next = current.next
+      current.next = prev
+      prev = current
+      current = next
+    }
+    this.head = prev
+  }
+}
+
+class Node {
+  constructor(val){
+    this.val = val
+    this.next = null
+  }
+}
 
 
 
