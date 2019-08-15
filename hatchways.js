@@ -858,5 +858,346 @@ class Node {
 }
 
 
+class TreeNode {
+  constructor(val){
+    this.val = val
+    this.left = null
+    this.right = null
+  }
+}
+
+let root = new TreeNode(20)
+root.left = new TreeNode(15)
+root.right = new TreeNode(32)
+root.left.left = new TreeNode(9)
+root.left.right = new TreeNode(17)
+root.right.left = new TreeNode(25)
+root.right.right = new TreeNode(40)
+/*
+        BST TREE
+          20
+        /    \
+      15      32
+    /   \    /   \
+   9    17  25   40
+*/
+
+/*
+  If you know you need to explore the roots before inspecting any leaves, 
+  you pick pre-order because you will encounter all the roots before all 
+  of the leaves.
+
+  If you know you need to explore all the leaves before any nodes,
+  you select post-order because you don't waste any time inspecting
+  roots in search for leaves.
+
+  If you know that the tree has an inherent sequence in the nodes,
+  and you want to flatten the tree back into its original sequence, 
+  than an in-order traversal should be used. The tree would be flattened
+  in the same way it was created. A pre-order or post-order traversal
+  might not unwind the tree back into the sequence which was used to create it.
+*/
+
+/*
+  - Pre-order -
+  read data, go left, go right
+  root, left, right
+  20, 15, 9, 17, 32, 25, 40
+*/
+
+const preDFS = (root, stack = []) => {
+  if (!root) return stack
+  stack.push(root.val)
+  preDFS(root.left, stack)
+  preDFS(root.right, stack)
+  return stack
+}
+
+/*
+  - In-order - 
+  go left, read data, go right
+  In-order  left, root, right
+  9, 15, 17, 20, 25, 32, 40
+*/
+
+const inOrderDFS = (root, stack = []) => {
+  if (!root) return stack
+  if (root.left) inOrderDFS(root.left, stack)
+  stack.push(root.val)
+  if (root.right) inOrderDFS(root.right, stack)
+  return stack
+}
+
+/*
+  - Post-order -
+  go left, go right, read data
+  left, right, root
+  9, 17, 15, 25, 40, 32, 20
+*/
+
+const postOrderDFS = (root, stack = []) => {
+  if (!root) return stack
+  if (root.left) postOrderDFS(root.left, stack)
+  if (root.left) postOrderDFS(root.right, stack)
+  stack.push(root.val)
+  return stack
+}
+
+/*
+  level order traversal
+  also know as breath first search
+  goes down one level at a time
+  20, 15, 32, 9, 17, 25, 40
+*/
+
+const bfs = (root) => {
+  if (!root) return
+  let q = []
+  q.push(root)
+  let str = ''
+  while(q.length > 0){
+    let current = q[0]
+    str += `${q[0].val} `
+    if (current.left) q.push(current.left)
+    if (current.right) q.push(current.right)
+    q.shift()
+  }
+  return str
+}
+
+console.log('bfs: ', bfs(root))
+console.log('preDFS: ', preDFS(root))
+console.log('inOrderDFS: ', inOrderDFS(root))
+console.log('postOrderDFS: ', postOrderDFS(root))
+
+
+
+
+
+
+
+
+
+
+/*
+  The tilt of a tree node is defined as the 
+  absolute difference between the sum of all left subtree 
+  node values and the sum of all right 
+  subtree node values. Null node has tilt 0.
+*/
+
+var findTilt = function(root){
+  let total = 0
+  const getTotal = (root) => {
+    if (!root) return 0;
+    let left = getTotal(root.left)
+    let right = getTotal(root.right)
+    total += Math.abs(left - right)
+    return root.val + left + right
+  }
+  getTotal(root)
+  return total
+}
+
+/*
+  A binary tree is univalued if every node in the tree has the same value.
+  Return true if and only if the given tree is univalued.
+*/
+
+var isUnivalTree = function(root) {
+  if(!root) return true;
+  if(root.left && root.val !== root.left.val) return false;
+  if(root.right && root.val !== root.right.val) return false;
+  return isUnivalTree(root.left) && isUnivalTree(root.right);
+};
+
+/*
+  Given a Binary Search Tree (BST), convert it to a Greater 
+  Tree such that every key of the original BST is changed to 
+  the original key plus sum of all keys greater than the original key in BST.
+*/
+
+var convertBST = (root) => {
+  if (root === null) return root;
+  let curSum = 0;
+  var dfs = (node) => {
+      if (node === null) return;
+      dfs(node.right)
+      curSum += node.val;
+      node.val = curSum;
+      dfs(node.left);
+  }
+  dfs(root)
+  return root;
+}
+
+/*
+  Given a binary tree, check whether it is a mirror of itself 
+  (ie, symmetric around its center).
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+*/
+
+var isSymmetric = function(root) {
+  if (root === null) return true;
+  
+  const checkSym = (left, right) => {
+    if (left === null || right === null) return left === right
+    if (left.val !== right.val) return false
+    return checkSym(left.left, right.right) && checkSym(left.right, right.left)
+  }  
+  
+ return checkSym(root.left, root.right); 
+};
+
+
+/*
+
+  Given two binary trees, write a 
+  function to check if they are the same or not.
+
+  Two binary trees are considered the same if they 
+  are structurally identical and the nodes have the same value
+
+   1         1
+  / \       / \
+ 2   3     2   3
+
+*/
+
+
+var isSameTree = function(p, q) {
+  if (!p && !q){return true}
+  if (!p && q || p && !q){return false}
+  if (p.val !== q.val){return false}
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+};
+
+/*
+
+  Given two non-empty binary trees s and t, check whether tree t 
+  has exactly the same structure and node values with a subtree of s. 
+  A subtree of s is a tree consists of a node in s and all of 
+  this node's descendants. The tree s could also be considered as a subtree of itself.
+
+    s:
+
+     3
+    / \
+   4   5
+  / \
+ 1   2
+
+  t:
+
+   4 
+  / \
+ 1   2
+
+*/
+
+var isSubtree = function(s, t) {
+
+  if (!s) return false
+  
+  let isSame = (s, t) => {
+      if (!s && !t) return true;
+      if (!s || !t) return false;
+      return s.val === t.val && isSame(s.left, t.left) && isSame(s.right, t.right)
+  }
+
+  return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t)
+
+};
+
+/*
+
+invert a binary tree
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+
+*/
+
+var invertTree = function(root) {
+  if (!root) return null
+  const invert = (root) => {
+    if (!root){return}
+    let left = root.left
+    root.left = root.right
+    root.right = left
+    invert(root.left)
+    invert(root.right)
+    return root
+  }
+  
+  root = invert(root)
+  return root
+};
+
+/*
+  Given two binary trees and imagine that when you put one of them to cover the other, 
+  some nodes of the two trees are overlapped while the others are not.
+
+  You need to merge them into a new binary tree. 
+  The merge rule is that if two nodes overlap, then sum 
+  node values up as the new value of the merged node. 
+  Otherwise, the NOT null node will be used as the node of new tree.
+*/
+
+var mergeTrees = function(t1, t2, root) {
+  if (!t1) return t2    
+  if (!t2) return t1
+  root = new TreeNode(t1.val + t2.val)
+  root.left = mergeTrees(t1.left, t2.left, root)
+  root.right = mergeTrees(t1.right, t2.right, root)
+  return root
+};
+
+/*
+  Given a binary tree, find its maximum depth.
+  The maximum depth is the number of nodes along the 
+  longest path from the root node down to the farthest leaf node.
+*/
+
+var maxDepth = function(root, counter = 0, max = 0) {
+  if (!root) return counter
+  counter += 1
+  if (counter > max) max = counter
+  let maxLeft = maxDepth(root.left, counter)
+  let maxRight = maxDepth(root.right, counter)
+  return maxLeft >= maxRight ? maxLeft : maxRight
+};
+
+/*
+  Given the root node of a binary search tree, 
+  return the sum of values of all nodes with value between L and R (inclusive).
+  The binary search tree is guaranteed to have unique values.
+*/
+
+var rangeSumBST = function(root, L, R) {
+  let sum = 0;
+  if (!root){
+      return sum;
+  }
+  if (root.val >= L && root.val <= R){
+      sum += root.val;
+  }
+  
+  return  sum + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R)
+};
 
 
