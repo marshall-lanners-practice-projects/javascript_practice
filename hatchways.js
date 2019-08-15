@@ -1200,4 +1200,40 @@ var rangeSumBST = function(root, L, R) {
   return  sum + rangeSumBST(root.left, L, R) + rangeSumBST(root.right, L, R)
 };
 
+/*
+  In a binary tree, the root node is at depth 0, and children of each depth k 
+  node are at depth k+1.
+
+  Two nodes of a binary tree are cousins if they have the same depth, 
+  but have different parents.
+
+  We are given the root of a binary tree with unique values, 
+  and the values x and y of two different nodes in the tree.
+
+  Return true if and only if the nodes 
+  corresponding to the values x and y are cousins.
+*/
+
+var isCousins = function(root, x, y) {
+  let parents = [];
+  let depths = [];
+  
+  const dfs = function(node, parent, depth, val) {
+      if (!node) return;
+      
+      if (node.val == val) {
+          parents.push(parent);
+          depths.push(depth);
+      }
+      
+      dfs(node.left, node, depth + 1, val);
+      dfs(node.right, node, depth + 1, val);
+  }
+  
+  dfs(root, null, 0, x);
+  dfs(root, null, 0, y);
+  
+  return parents[0] !== parents[1] && depths[0] === depths[1];
+};
+
 
