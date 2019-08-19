@@ -905,6 +905,7 @@ root.right.right = new TreeNode(40)
   20, 15, 9, 17, 32, 25, 40
 */
 
+
 const preDFS = (root, stack = []) => {
   if (!root) return stack
   stack.push(root.val)
@@ -969,14 +970,6 @@ console.log('bfs: ', bfs(root))
 console.log('preDFS: ', preDFS(root))
 console.log('inOrderDFS: ', inOrderDFS(root))
 console.log('postOrderDFS: ', postOrderDFS(root))
-
-
-
-
-
-
-
-
 
 
 /*
