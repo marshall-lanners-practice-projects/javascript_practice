@@ -1284,4 +1284,22 @@ var increasingBST = function(root) {
     return treeNode.right
 };
 
+const flatAr = (ar) => {
+  const result = []
+  const helper = (item) => {
+    if (typeof item !== 'number'){
+      for (let i = 0; i < item.length; i++){
+        helper(item[i])
+      }
+    } else {
+      result.push(item)
+    }
+  }
+  helper(ar)
+  return result
+}
+flatAr([1, [2, [3, [4, 5]]], [6,7], 10]) 
+
+
+
 
