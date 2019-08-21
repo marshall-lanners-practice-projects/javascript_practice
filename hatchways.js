@@ -1300,3 +1300,23 @@ const flatAr = (ar) => {
 }
 flatAr([1, [2, [3, [4, 5]]], [6,7], 10])
 
+
+const ar = [1,2,2,1,2,3,4,3,4,4]
+
+const ifOdd = (ar) => {
+  const hash = {}, ar2 = []
+
+  ar.forEach(num => {
+    hash[num] ? hash[num]++ : hash[num] = 1
+  })
+
+  console.log(hash)
+
+  for (let key in hash){
+    if (hash[key] % 2 !== 0){
+      ar2.push(key)
+    }
+  }
+  return ar2
+}
+
