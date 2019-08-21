@@ -1298,8 +1298,5 @@ const flatAr = (ar) => {
   helper(ar)
   return result
 }
-flatAr([1, [2, [3, [4, 5]]], [6,7], 10]) 
-
-
-
+flatAr([1, [2, [3, [4, 5]]], [6,7], 10])
 
