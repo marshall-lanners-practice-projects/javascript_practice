@@ -202,7 +202,7 @@ let insertionSort = (items) => {
 	console.log(items)
 }
 
-insertionSort(arraySort) // [ 17, 20, 26, 31, 44, 54, 55, 77, 93 ]
+insertionSort(arraySort) 
 
 /*
   Example - Two Sum
@@ -1300,23 +1300,19 @@ const flatAr = (ar) => {
 }
 flatAr([1, [2, [3, [4, 5]]], [6,7], 10])
 
-
-const ar = [1,2,2,1,2,3,4,3,4,4]
-
-const ifOdd = (ar) => {
-  const hash = {}, ar2 = []
-
-  ar.forEach(num => {
-    hash[num] ? hash[num]++ : hash[num] = 1
-  })
-
-  console.log(hash)
-
-  for (let key in hash){
-    if (hash[key] % 2 !== 0){
-      ar2.push(key)
+var isValid = function(s) {
+    
+    const map = {')': '(', '}': '{', ']': '['}
+    const stack = []
+    
+    for (let i = 0; i < s.length; i++){
+        if (s[i] === '{' || s[i] === '[' || s[i] === '('){
+            stack.push(s[i])
+        } else {
+            if (stack.pop() !== map[s[i]]) return false
+        }
     }
-  }
-  return ar2
-}
+    
+    return stack.length === 0;
+};
 
