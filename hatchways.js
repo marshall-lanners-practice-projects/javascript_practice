@@ -1316,3 +1316,32 @@ var isValid = function(s) {
     return stack.length === 0;
 };
 
+class Q {
+  constructor(){
+    this.input = []
+    this.output = []
+  }
+  enque(val){
+    this.input.push(val)
+  }
+  deque(){
+    while(this.input.length > 0){
+      this.output.push(this.input.pop())
+    }
+    return this.output.pop()
+  }
+}
+
+const q = new Q()
+
+q.enque(1)
+q.enque(2)
+q.enque(3)
+q.enque(4)
+q.enque(5)
+
+console.log(q)
+const item = q.deque()
+console.log(item)
+console.log(q)
+
