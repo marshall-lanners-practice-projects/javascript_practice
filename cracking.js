@@ -179,5 +179,157 @@ const compression = (w) => {
 
 compression('abbbbbc')
 
+class LinkedList {
+  constructor(){
+    this.head = null
+    this.size = 0
+  }
+
+  add(val){
+    let node = new Node(val)
+    if (this.size === 0) {
+      this.head = node
+    } else {
+      let current = this.head, prev
+      while(current){
+        prev = current
+        current = current.next
+      }
+      prev.next = node
+    }
+    this.size++
+  }
+
+  log(){
+    if (this.size === 0) return 'no nodes'
+    let current = this.head
+    let str = ''
+    while(current){
+      str += `${current.val} -> `
+      current = current.next
+    }
+    str += 'null'
+    console.log(str)
+  }
+
+  /*
+  Remove Dups: Write code to remove duplicates from an unsorted linked list. 
+
+  FOLLOW UP
+  How would you solve this problem if a temporary buffer is not allowed?
+  */
+
+  removeDups(){
+    let current = this.head
+    let next = current.next
+    const hash = {};
+    hash[current.val] = true
+    while(next){
+      if (hash[next.val]){
+        current.next = next.next
+      } else {
+        hash[next.val] = true
+        current = next
+      }
+      next = next.next
+    }
+  }
+
+  /*
+    Partition: Write code to partition a linked 
+    list around a value x, such that all nodes less than 
+    x come before all nodes greater than or equal to x. If 
+    x is contained within the list, the values of x only need 
+    to be after the elements less than x (see below).
+    The partition element x can appear anywhere in the "right partition"; 
+    it does not need to appear between the left and right partitions.
+
+    [partition = 5]
+    Input: 3 -> 5 -> 8 -> 5 -> 10 -> 2 -> null
+    Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+  */
+
+  partition(val) {
+    let linkedList1 = new LinkedList()
+    let linkedList2 = new LinkedList()
+    let current = this.head
+
+    while(current){
+      if (current.val < val){
+        linkedList1.add(current.val)
+      } else {
+        linkedList2.add(current.val)
+      }
+      current = current.next
+    }
+
+    let current2 = linkedList1.head, prev
+    while(current2){
+      prev = current2
+      current2 = current2.next
+    }
+
+    prev.next = linkedList2.head
+    this.head = linkedList1.head
+  }
+
+}
+
+class Node {
+  constructor(val){
+    this.val = val
+    this.next = null
+  }
+}
 
 
+linkedList = new LinkedList()
+linkedList.add(7)
+linkedList.add(1)
+linkedList.add(6)
+linkedList.log()
+
+linkedList2 = new LinkedList()
+linkedList2.add(5)
+linkedList2.add(9)
+linkedList2.add(2)
+linkedList2.log()
+
+/*
+  Sum Lists: You have two numbers represented by a 
+  linked list, where each node contains a single digit. 
+  The digits are stored in reverse order, such that the 1's 
+  digit is at the head of the list. Write a function that 
+  adds the two numbers and returns the sum as a linked list.
+
+  EXAMPLE
+  input: (7 -> 1 -> 6) + (5 -> 9 -> 2) 
+  617 + 295
+  output: 2 -> 1 -> 9. 912
+*/
+
+const sumLists = (node1, node2) => {
+
+  let str
+  const getSum = (node) => {
+    str = ''
+    if (!node) return str
+    getSum(node.next)
+    str += node.val
+    return Number(str)
+  }
+
+  const num1 = getSum(node1)
+  const num2 = getSum(node2)
+  const final = (num1 + num2).toString()
+  let list = new LinkedList()
+
+  for (let i = 0; i < final.length; i++){
+    list.add(final[i])
+  }
+
+  return list
+}
+
+const combined = sumLists(linkedList.head, linkedList2.head)
+combined.log()
