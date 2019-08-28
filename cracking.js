@@ -323,7 +323,6 @@ const sumLists = (node1, node2) => {
   const num2 = getSum(node2)
   const final = (num1 + num2).toString()
   let list = new LinkedList()
-
   for (let i = 0; i < final.length; i++){
     list.add(final[i])
   }
@@ -333,3 +332,184 @@ const sumLists = (node1, node2) => {
 
 const combined = sumLists(linkedList.head, linkedList2.head)
 combined.log()
+
+/*
+  Palindrome: Implement a function to check if a linked list is a palindrome.
+*/
+
+linkedList3 = new LinkedList()
+linkedList3.add(1)
+linkedList3.add(2)
+linkedList3.add(3)
+linkedList3.add(2)
+linkedList3.add(1)
+linkedList3.log()
+
+const isPalindrom = (list) => {
+  let bol = true, current = list
+  const checkList = (list) => {
+    if (!list) return list
+    checkList(list.next)
+    current.val !== list.val && (bol = false)
+    console.log(current.val, list.val)
+    current = current.next
+    return bol
+  }
+  return checkList(list)
+}
+
+isPalindrom(linkedList3.head)
+
+/*
+  find intersection of linked list
+*/
+
+const getIntersectionNode = (headA, headB) => {
+  let currA = headA;
+  let currB = headB;
+  while (currA) {
+      currA.visited = true;
+      currA = currA.next;
+  }
+  while (currB) {
+      if (currB.visited) { return currB; }
+      currB = currB.next;
+  }
+  return null;
+}
+
+/*
+  determin if linked list has a cycle
+*/
+
+const hashCycle = (head) => {
+  let slow = head, fast = head
+    while (fast && fast.next){
+        slow = slow.next
+        fast = fast.next.next
+        if (slow === fast) return true
+    }
+    return false
+}
+
+// STACKS
+//-----------------------------------------------
+
+/*
+  Stack Min: How would you design a stack which, 
+  in addition to push and pop, has a function min 
+  which returns the minimum element? Push, pop and 
+  min should all operate in 0(1) time.
+*/
+
+class Stack {
+  constructor(){
+    this.stack = []
+    this.minStack = []
+  }
+
+  push(val){
+    this.stack.push(val)
+    if (this.minStack.length === 0){
+      this.minStack.push(val)
+    } else {
+      this.minStack[this.minStack.length - 1] >= val && this.minStack.push(val)
+    }  
+  }
+
+  pop(val){
+    let popped = this.stack.pop()
+    popped === this.minStack[this.minStack.length - 1] && this.minStack.pop()
+    return popped
+  }
+
+  min(){
+    return this.minStack[this.minStack.length - 1]
+  }
+
+}
+
+let stack = new Stack()
+
+stack.push(5)
+stack.push(2)
+stack.push(10)
+stack.push(1)
+console.log(stack.min())
+
+/*
+  implement a queue using two stacks.
+*/
+
+class Queue {
+  constructor(){
+    this.input = []
+    this.output = []
+  }
+
+  enqueue(x){
+    this.input.push(x)
+  }
+
+  dequeue(x){
+    while(this.input.length !== 0){
+      this.output.push(this.input.pop())
+    }
+    return this.output.pop()
+  }
+}
+
+const q = new Queue()
+
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+q.enqueue(4)
+console.log(q.dequeue())
+
+/*
+  Sort Stack: Write a program to sort a stack 
+  such that the smallest items are on the top. 
+  You can use an additional temporary stack, 
+  but you may not copy the elements into any 
+  other data structure (such as an array). 
+  The stack supports the following operations: push, pop, peek, and isEmpty.
+*/
+
+class Stack {
+  constructor(){
+    this.stack = []
+  }
+
+  push(x){
+   this.stack.push(x)
+  }
+
+  peek(){
+    return this.stack[this.stack.length - 1]
+  }
+
+  sort(){
+    const helper = []
+    while(this.stack.length !== 0){
+      let popped = this.stack.pop()
+      while(helper.length !== 0 && 
+      helper[helper.length - 1] > popped
+      ){
+        this.stack.push(helper.pop())
+      }
+      helper.push(popped)
+    }
+    this.stack = helper
+  }
+}
+
+const stack = new Stack()
+stack.push(4)
+stack.push(8)
+stack.push(3)
+stack.push(1)
+stack.push(10)
+stack.push(2)
+stack.sort()
+console.log(stack.stack)
