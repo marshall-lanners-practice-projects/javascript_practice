@@ -513,3 +513,53 @@ stack.push(10)
 stack.push(2)
 stack.sort()
 console.log(stack.stack)
+
+
+/* 
+  Graphs: Breadth-first search 
+  get the distance of all nodes in directed graph
+*/
+
+const bfs = (graph, root) => {
+  const nodesLen = {}
+  for (let i = 0; i < graph.length; i++){
+    nodesLen[i] = false
+  }
+  nodesLen[root] = 0
+  let current
+  let que = [root]
+  while(que.length !== 0){
+    current = que.shift()
+    let connections = graph[current]
+    for (let i = 0; i < connections.length; i++){
+      if (connections[i] === 1 && nodesLen[i] === false){
+        nodesLen[i] = nodesLen[current] + 1
+        que.push(i)
+      }
+    }
+  }
+  return nodesLen
+}
+
+var exBFSGraph = [
+  //connections
+  [0, 1, 1, 1, 0],   //nodes
+  [0, 0, 1, 1, 0],
+  [1, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0]
+];
+console.log(bfs(exBFSGraph, 4));
+
+/* 
+    Graph representation
+
+    0 - >  1 < - 4
+    ^  \/^ 
+    | v  v 
+    2 < -  3 - - >
+           ^     |
+           | _ _ |
+  */
+
+  
