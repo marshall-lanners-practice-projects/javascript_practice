@@ -1,7 +1,6 @@
 /*
 	ALL INTERVIEW QUESTINOS FROM HATCHWAYS INTERVIEW PREP
 */
-
 /*
   determin if a string is a palindrome
   e.g same forward as backward
