@@ -7,6 +7,7 @@
   e.g same forward as backward
 */
 
+
 let isPalindrome = (str) => {
   let j = str.length - 1
   let i = 0
