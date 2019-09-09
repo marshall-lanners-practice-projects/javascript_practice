@@ -4,6 +4,7 @@
 	What if you cannot use additional data structures?
 */
 
+
 const hasDups = (word) => {
   const hash = {}
   for (let i = 0; i < word.length; i++){
