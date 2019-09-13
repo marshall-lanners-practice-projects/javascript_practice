@@ -3,7 +3,6 @@
 	step 1, model the problem as a graph
 	step 2, solve the problem using breath-first search
 
-
 	A graph models a sec of connections. For example, suppose you and
 	your friends are playing poker, and you want to model who owes whom money.
 	Here's how you could say, "Alex owes Rama money"
