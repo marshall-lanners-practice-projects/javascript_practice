@@ -123,3 +123,70 @@ let reverse = (ar) => {
   console.log(ar)
 }
 reverse(['h','e','l','l','o'])
+
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  insertFirst(data) {
+    this.head = new Node(data, this.head);
+  }
+
+  getFirst() {
+    return this.head;
+  }
+
+  clear() {
+    this.head = null;
+  }
+
+}
+
+let newList = new LinkedList
+newList.insertFirst(4)
+newList.insertFirst(3)
+newList.insertFirst(2)
+newList.insertFirst(1)
+
+let listHead = newList.head
+
+// 1 -> 2 -> 3 -> 4 -> null
+// 2 -> 1 -> 4 -> 3 -> null
+
+const swapPairs = (head) => {
+  let temp = new Node(0)
+  temp.next = head
+  let current = temp
+  while(current.next && current.next.next){
+    first = current.next
+    second = current.next.next
+    first.next = second.next
+    current.next = second
+    current.next.next = first
+    current = current.next.next
+  }
+  return temp.next
+}
+
+const logVals = (head) => {
+  let str = ''
+  let current = head
+  while(current){
+    str = str + current.data + ' -> '
+    current = current.next
+  }
+  str = str + 'null'
+  console.log(str)
+}
+
+const newHead = swapPairs(listHead)
+console.log()
+logVals(newHead)
