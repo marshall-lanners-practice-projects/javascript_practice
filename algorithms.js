@@ -190,3 +190,47 @@ const logVals = (head) => {
 const newHead = swapPairs(listHead)
 console.log()
 logVals(newHead)
+
+
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null
+  }
+}
+/*
+           10
+      /          \ 
+      7           18
+    /  \        /     \
+   4     8     14     30
+
+*/
+
+const root = new Node(10)
+root.left = new Node(7)
+root.left.left = new Node(4)
+root.left.right = new Node(8)
+root.right = new Node(18)
+root.right.left = new Node(14)
+root.right.right = new Node(30)
+
+// console.log all items in bfs order
+const bfs = (root) => {
+  const que = []
+  que.push(root)
+  let current
+
+  while(que.length > 0) {
+    current = que[0]
+    if (current.left) que.push(current.left)
+    if (current.right) que.push(current.right)
+    console.log(que[0].val)
+    que.shift()
+
+  }
+}
+
+bfs(root)
