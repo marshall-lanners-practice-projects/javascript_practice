@@ -3,7 +3,6 @@
 	will look up first item that matches the specificed search criteria
 */
 
-
 let title = document.querySelector('h1')
 console.log(title)
 title.style.color = "blue"
